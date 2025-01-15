@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# https://stackoverflow.com/a/47512301/1204375
+# ffmpeg -i input.mp4 -c:v libvpx-vp9 -crf 30 -b:v 0 -b:a 128k -c:a libopus output.webm
+
+if [ $# -ne 2 ]; then
+  echo "Usage: $(basename ${0}) <input> <output>"
+  exit 1
+fi
+
+echo "Input: ${1}"
+echo "Output: ${2}"
+
+ffmpeg -i "${1}" -c:v libvpx-vp9 -crf 30 -b:v 0 -b:a 128k -c:a libopus "${2}"

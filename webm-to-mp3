@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if [ $# -ne 2 ]; then
+  echo "Usage: $(basename ${0}) <input> <output>"
+  exit 1
+fi
+
+echo "Input: ${1}"
+echo "Output: ${2}"
+
+ffmpeg -i "${1}" -vn -ab 128k -ar 44100 -y "${2}"
