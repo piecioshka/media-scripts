@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# brew install librsvg
+
+if ! command -v rsvg-convert &> /dev/null; then
+  echo "rsvg-convert could not be found. Please install it first. Using brew: brew install librsvg"
+  exit 1
+fi
+
+if [ $# -ne 2 ]; then
+  echo "Usage: $(basename ${0}) <input> <output>"
+  exit 1
+fi
+
+echo "Input: ${1}"
+echo "Output: ${2}"
+
+rsvg-convert -f pdf -o "${2}" "${1}"
