@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+if [ $# -ne 4 ]; then
+  echo "Usage: $(basename ${0}) <input> <output> <width> <height>"
+  exit 1
+fi
+
+echo "Input: ${1}"
+echo "Output: ${2}"
+echo "Width: ${3}"
+echo "Height: ${4}"
+
+# brew install ghostscript
+gs \
+  -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dSAFER \
+  -dCompatibilityLevel="1.5" -dPDFSETTINGS="/printer" \
+  -dColorConversionStrategy=/LeaveColorUnchanged \
+  -dSubsetFonts=true -dEmbedAllFonts=true \
+  -dDEVICEWIDTHPOINTS=${3} -dDEVICEHEIGHTPOINTS=${4} \
+  -dAutoRotatePages='/PageByPage' \
+  -dFIXEDMEDIA -dPDFFitPage \
+  -sOutputFile=${2} \
+  -f ${1}
